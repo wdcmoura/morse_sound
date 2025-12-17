@@ -27,7 +27,7 @@
 
       <h5 class="card-title mb-3">Sender Morse</h5>
       <p class="text-muted small">
-        Envie a quantidade de sinais para o receptor
+        Digite o número e pressione ENTER
       </p>
 
       <div class="mb-3">
@@ -37,6 +37,7 @@
           class="form-control text-center"
           placeholder="Quantidade de bipes"
           min="1"
+          autofocus
         >
       </div>
 
@@ -55,8 +56,17 @@
 </div>
 
 <script>
+const input = document.getElementById('num');
+
+input.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    send();
+  }
+});
+
 async function send() {
-  const n = document.getElementById('num').value;
+  const n = input.value;
   const status = document.getElementById('status');
 
   if (!n || n <= 0) {
@@ -74,6 +84,9 @@ async function send() {
 
     status.innerText = 'Enviado com sucesso';
     status.className = 'badge bg-success';
+
+    input.value = '';        // limpa
+    input.focus();           // volta foco
   } catch (e) {
     status.innerText = 'Erro ao enviar';
     status.className = 'badge bg-danger';
