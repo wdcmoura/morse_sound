@@ -72,6 +72,12 @@ function beep() {
   setTimeout(() => o.stop(), 120);
 }
 
+function vibrate(ms) {
+  if (navigator.vibrate) {
+    navigator.vibrate(ms);
+  }
+}
+
 async function play(n) {
   for (let i = 0; i < n; i++) {
     beep();

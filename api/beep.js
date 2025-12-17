@@ -20,5 +20,19 @@ export default function handler(req, res) {
     });
   }
 
+  function beep() {
+  if (!ctx) return;
+
+  const o = ctx.createOscillator();
+  o.frequency.value = 800;
+  o.connect(ctx.destination);
+  o.start();
+
+  vibrate(120); // 📳 vibra junto
+
+  setTimeout(() => o.stop(), 120);
+}
+
+
   res.status(405).end();
 }
