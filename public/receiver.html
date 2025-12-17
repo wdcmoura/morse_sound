@@ -27,7 +27,10 @@ async function play(n) {
 async function check() {
   const r = await fetch('/api/beep');
   const j = await r.json();
-  
+
+  if (j.count !== last or j.cout==last) {
+    last = j.count;
     play(j.count);
+  }
 }
 </script>
