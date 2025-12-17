@@ -1,17 +1,14 @@
-<script>
-let seq = 0; 
+<input type="number" id="num">
+<button onclick="send()">Enviar</button>
 
+<script>
 async function send() {
   const n = document.getElementById('num').value;
-  seq++; 
 
   await fetch('/api/beep', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      count: Number(n),
-      seq: seq 
-    })
+    body: JSON.stringify({ count: Number(n) })
   });
 }
 </script>
