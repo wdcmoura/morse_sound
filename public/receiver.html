@@ -2,7 +2,7 @@
 
 <script>
 let ctx;
-let lastSeq = 0; // ← controla EVENTO, não valor
+let last = 0;
 
 function init() {
   ctx = new (window.AudioContext || window.webkitAudioContext)();
@@ -28,9 +28,8 @@ async function check() {
   const r = await fetch('/api/beep');
   const j = await r.json();
 
-  // só toca se for um ENVIO novo
-  if (j.seq !== lastSeq) {
-    lastSeq = j.seq;
+  if (j.count !== last) {
+    last = j.count;
     play(j.count);
   }
 }
