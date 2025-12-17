@@ -6,7 +6,12 @@ let last = 0;
 
 function init() {
   ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
   setInterval(check, 800);
+  
 }
 
 function beep() {
