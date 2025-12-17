@@ -87,8 +87,11 @@ async function check() {
   try {
     const r = await fetch('/api/beep');
     const j = await r.json();
-    play(j.count);
-    
+
+    if (j.count !== last) {
+      last = j.count;
+      play(j.count);
+    }
   } catch (e) {
     document.getElementById('status').innerText = 'Erro na conexão';
     document.getElementById('status').className = 'badge bg-danger';
